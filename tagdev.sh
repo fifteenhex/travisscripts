@@ -1,5 +1,8 @@
 #!/bin/sh
 
+set -e
+set -x
+
 if [ $# -ne 3 ]; then
 	exit 1
 fi
@@ -10,7 +13,7 @@ IV=$3
 
 openssl aes-256-cbc -K $KEY \
 	-iv $IV \
-	-in $SSKEY -out ~/.ssh/id_rsa -d
+	-in $SSHKEY -out ~/.ssh/id_rsa -d
 chmod 0400 ~/.ssh/id_rsa
 git config --global user.email "builds@travis-ci.com"
 git config --global user.name "Travis CI"
