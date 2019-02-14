@@ -1,15 +1,16 @@
 #!/bin/sh
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
 	exit 1
 fi
 
-KEY=$1
-IV=$2
+SSHKEY=$1
+KEY=$2
+IV=$3
 
 openssl aes-256-cbc -K $KEY \
 	-iv $IV \
-	-in deploy_key.enc -out ~/.ssh/id_rsa -d
+	-in $SSKEY -out ~/.ssh/id_rsa -d
 chmod 0400 ~/.ssh/id_rsa
 git config --global user.email "builds@travis-ci.com"
 git config --global user.name "Travis CI"
